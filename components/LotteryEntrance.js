@@ -39,6 +39,8 @@ const LotteryEntrance = () => {
                 try {
                     
                     const entranceFeeFromCall = (await getEntranceFee()).toString()
+
+                    console.log(entranceFeeFromCall);
                     setEntranceFee(entranceFeeFromCall)
                     console.log("Entrance fee:", entranceFee)
                     
