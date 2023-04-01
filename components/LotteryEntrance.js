@@ -9,13 +9,16 @@ const LotteryEntrance = () => {
 
     const chainId = parseInt(chainIdHex)
 
-    const raffleAddress = chainIdHex in contractAddresses ? contractAddresses[chainId][0] : null
+    console.log(chainId)
 
-    console.log(raffleAddress);
+    const raffleAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null
+
+    // console.log(raffleAddress)
 
     const [entranceFee, setEntranceFee] = useState("0")
+    
 
-    console.log(parseInt(chainIdHex))
+    // console.log(parseInt(chainIdHex))
 
     // const { runContractFunction: enterRaffle } = useWeb3Contract({
     //     abi: abi,
@@ -25,7 +28,6 @@ const LotteryEntrance = () => {
     //     msgValue://
 
     // })
-
     const { runContractFunction: getEntranceFee } = useWeb3Contract({
         abi: abi,
         contractAddress: raffleAddress,
@@ -34,24 +36,15 @@ const LotteryEntrance = () => {
     })
 
     useEffect(() => {
-        const updateUI = async () => {
-            if (isWeb3Enabled) {
-                try {
-                    
-                    const entranceFeeFromCall = (await getEntranceFee()).toString()
-
-                    console.log(entranceFeeFromCall);
-                    setEntranceFee(entranceFeeFromCall)
-                    console.log("Entrance fee:", entranceFee)
-                    
-                } catch (error) {
-                    console.log("Error fetching entrance fee:", error)
-                }
-            }
+        if (isWeb3Enabled) {
+          const updateUI = async () => {
+           const something =await getEntranceFee()
+           console.log(something);
+          }
+          updateUI()
         }
-
-        updateUI()
-    }, [isWeb3Enabled])
+      }, [isWeb3Enabled])
+      
 
     return <div>{entranceFee}</div>
 }
